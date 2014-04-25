@@ -13,8 +13,9 @@ module.exports = function(grunt) {
 	'dist/*', // remove everythig in dist except the readme (this keeps dist as an active dir in source control)
 	'!dist/README.md'], // ignore the README file
       post: [
-	'validation-status.json', // left by html validation
-	'tmp' // holding temporary build files
+	'.sass-cache', // leftover from sass complile
+	'tmp', // holding temporary build files
+	'validation-status.json' // left by html validation
       ]
     },
 
