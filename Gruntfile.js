@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     },
 
     copy : [
-      {expand: true, cwd: 'tmp/', src: ['index.html', 'index.css', 'index.js'], dest: 'dist/'}
+      {expand: true, cwd: 'tmp/', src: ['index.{css,html,js}'], dest: 'dist/'}
     ],
 
     csslint : [
@@ -114,6 +114,9 @@ module.exports = function(grunt) {
     // optimize images, move to tmp
 
     'copy',  // copy files to dist
+
+    // do a mocha test?
+
     'clean:post' // remove tmp dir and misc build files
   ]);
 
