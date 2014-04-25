@@ -1,0 +1,8 @@
+node_modules/*
+.s3-auth.json
+dist/*
+!dist/README.md
+tmp
+dist
+validation-status.json
+.sass-cache

@@ -1,0 +1,37 @@
+doctype html
+//- basically a copy of the reveal.js html template, reveal content is deleivered from an external source just to simplify the build process of this project
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title The Grunt Task Runner
+    meta(name='description', content='A talk I gave to the SoME www user group in May, 2014')
+    meta(name='author', content='Thomas Leen')
+
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black-translucent')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+
+    link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/css/reveal.min.css')
+    link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/css/theme/default.css', id='theme')
+    link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/lib/css/zenburn.css')
+    link(rel='stylesheet' href='index.css')
+    //if lt IE 9 
+      script(src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/lib/js/html5shiv.jsc')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/lib/js/head.min.js', defer, async)
+    script(src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/js/reveal.min.js', defer, async)
+    script(src='index.js', defer, async)
+
+
+  body    
+    header
+      h1 Intro to Grunt
+      
+    .reveal
+      .slides
+        section
+          h2 Slide One
+          p This is text about slide one
+        section
+          h2 Slide Two
+          p This is content for slide two
+
