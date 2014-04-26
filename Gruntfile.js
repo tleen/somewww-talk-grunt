@@ -57,14 +57,14 @@ module.exports = function(grunt) {
     
     imagemin: {
       options: {cache: false},
-      files: { expand: true, cwd: 'assets/images', src: ['**.{png,jpg}'], dest: 'tmp/images/'}
+      assets: { expand: true, cwd: 'assets/images', src: ['**.{png,jpg}'], dest: 'tmp/images/'}
     },
 
     jade: {
       options: {
 	pretty: true
       },
-      files: {expand: true , cwd: 'src/jade', src: ['*.jade'], dest: 'tmp/', ext: '.html'}
+      templates: {expand: true , cwd: 'src/jade', src: ['*.jade'], dest: 'tmp/', ext: '.html'}
     },
 
     jshint: {
