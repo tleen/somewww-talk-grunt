@@ -56,10 +56,8 @@ module.exports = function(grunt) {
     ],
     
     imagemin: {
-      all : {
-	options: {cache: false},
-	files: [{ expand: true, cwd: 'assets/images', src: ['**.{png,jpg}'], dest: 'tmp/images/'}]
-      }
+      options: {cache: false},
+      files: { expand: true, cwd: 'assets/images', src: ['**.{png,jpg}'], dest: 'tmp/images/'}
     },
 
     jade: {
@@ -126,8 +124,14 @@ module.exports = function(grunt) {
     'jade', // build html from template(s)
     'sass', // build css from template(s)
 
+
+    'imagemin', // optimize images + move to tmp
+
+    // xx - running validation before imagemin causes imagemin to fail
     'validation', // validate html
+
     'jshint', // validate javascript
+
     'csslint', // validate css
 
     'concat', // concat groups of files into a single file
@@ -135,13 +139,12 @@ module.exports = function(grunt) {
     'cssmin', // minify css
     'uglify', // minify js
 
-    'imagemin', // optimize images + move to tmp
-
     'copy',  // copy tmp files to dist
-
+/*
     // do a mocha test? add a token into the build and view it?
 
     // force this to run even if other tasks fail
+*/
     'clean:post' // remove tmp dir and misc build files
   ];
 
