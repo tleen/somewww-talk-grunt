@@ -44,7 +44,7 @@ module.exports = function(grunt) {
     },
 
     copy : [
-      {expand: true, cwd: 'tmp/', src: ['index.{css,html,js}'], dest: 'dist/'}
+      {expand: true, cwd: 'tmp/', src: ['**/*.*'], dest: 'dist/'}
     ],
 
     csslint : [
@@ -52,12 +52,15 @@ module.exports = function(grunt) {
     ],
     
     cssmin : [
-      {src: 'tmp/*.css', dest: 'tmp/*.css'}
+      {src: 'tmp/index.css', dest: 'tmp/index.css'}
     ],
     
-    imagemin: [
-      { expand: true, cwd: 'assets/images', src: ['*.{png,jpg,gif}'], dest: 'dist/images/'}
-    ],
+    imagemin: {
+      all : {
+	options: {cache: false},
+	files: [{ expand: true, cwd: 'assets/images', src: ['**.{png,jpg}'], dest: 'tmp/images/'}]
+      }
+    },
 
     jade: {
       options: {

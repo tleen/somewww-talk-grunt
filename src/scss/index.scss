@@ -1,6 +1,12 @@
-$red: #ff0000;  
+/*!
+ I don't really need css for this, but did want to show how it would be part of the build process
+*/
 
+/* Local Variables:  */
+/* mode: css           */
+/* End:              */
+$white: #fff;  
 
-body{
-  border: 3px solid $red;
+header{
+  display: none;
 }
