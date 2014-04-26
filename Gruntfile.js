@@ -54,14 +54,10 @@ module.exports = function(grunt) {
     cssmin : [
       {src: 'tmp/*.css', dest: 'tmp/*.css'}
     ],
-
-    mkdir: {
-      all : {
-	options : {
-	  create : ['tmp']
-	}
-      }
-    },
+    
+    imagemin: [
+      { expand: true, cwd: 'assets/images', src: ['*.{png,jpg,gif}'], dest: 'dist/images/'}
+    ],
 
     jade: {
       options: {
@@ -76,6 +72,14 @@ module.exports = function(grunt) {
       },
       files: {
 	src : ['Gruntfile.js', 'src/js/*.js']
+      }
+    },
+
+    mkdir: {
+      all : {
+	options : {
+	  create : ['tmp']
+	}
       }
     },
 
@@ -105,6 +109,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-html-validation');
@@ -127,9 +132,9 @@ module.exports = function(grunt) {
     'cssmin', // minify css
     'uglify', // minify js
 
-    // optimize images, move to tmp
+    'imagemin', // optimize images + move to tmp
 
-    'copy',  // copy files to dist
+    'copy',  // copy tmp files to dist
 
     // do a mocha test? add a token into the build and view it?
 
