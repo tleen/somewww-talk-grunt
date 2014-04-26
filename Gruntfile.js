@@ -5,13 +5,26 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     s3Credentials: grunt.file.readJSON('.s3-auth.json'),
 
-    clean: {
-      options : {
-	force: true // dist is a symlink to a www directory so force alows me to clean contents out of current directory
+    // the ordering of these tasks does not matter, I did it alphabetically
+
+    aws_s3: {
+      options: {
+	accessKeyId: '<%= s3Credentials.key %>',
+	secretAccessKey: '<%= s3Credentials.secret %>',
+	bucket: '<%= s3Credentials.bucket %>'
       },
-      pre: [
+      upload: {action: 'upload', expand: true, cwd: 'dist/', src: ['**/**.*','!README.md'], dest: ''}      
+    },
+
+    clean: {
+      pre: {
+	options : {
+	  force: true // dist is a symlink to a www directory so force alows me to clean contents out of current directory
+	},
+	src: [ 
 	'dist/*', // remove everythig in dist except the readme (this keeps dist as an active dir in source control)
 	'!dist/README.md'], // ignore the README file
+      },
       post: [
 	'.sass-cache', // leftover from sass complile
 	'tmp', // holding temporary build files
@@ -84,6 +97,7 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-aws-s3');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -96,7 +110,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-html-validation');
   grunt.loadNpmTasks('grunt-mkdir');
 
-  grunt.registerTask('default', [
+
+  var taskList = [
     'clean:pre', // make sure dist directory is clear
     'mkdir',  // make tmp dir for build
 
@@ -116,9 +131,18 @@ module.exports = function(grunt) {
 
     'copy',  // copy files to dist
 
-    // do a mocha test?
+    // do a mocha test? add a token into the build and view it?
 
+    // force this to run even if other tasks fail
     'clean:post' // remove tmp dir and misc build files
-  ]);
+  ];
+
+  grunt.registerTask('default', taskList);
+
+  // for the deploy task I am going to rebuild everything then add an upload to s3
+  // grunt-contrib-compress? 
+
+  // aws task fails silently when part of a tasklist :(
+  grunt.registerTask('publish', taskList.concat(['aws_s3']));
 
 };
