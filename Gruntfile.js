@@ -28,7 +28,7 @@ module.exports = function(grunt) {
       post: [
 	'.sass-cache', // leftover from sass complile
 	'tmp', // holding temporary build files
-	'validation-status.json' // left by html validation
+	'validation-*.json' // left by html validation
       ]
     },
 
@@ -43,9 +43,10 @@ module.exports = function(grunt) {
       }
     },
 
-    copy : [
-      {expand: true, cwd: 'tmp/', src: ['**/*.*'], dest: 'dist/'}
-    ],
+    copy : {
+      assets : {expand: true, cwd: 'assets/', src: ['humans.txt'], dest: 'tmp/'},
+      tmp : {expand: true, cwd: 'tmp/', src: ['**/*.*'], dest: 'dist/'}
+    },
 
     csslint : [
       {expand: true, src: 'tmp/*.css'}
@@ -77,7 +78,7 @@ module.exports = function(grunt) {
     },
 
     mkdir: {
-      all : {
+      tmp : {
 	options : {
 	  create : ['tmp']
 	}
@@ -98,7 +99,7 @@ module.exports = function(grunt) {
 	reportpath : false,
 	reset : true
       },
-      files: {expand: true, cwd: 'tmp/', src: ['*.html']}
+      html: {expand: true, cwd: 'tmp/', src: ['*.html']}
     }
   });
 
@@ -153,7 +154,8 @@ module.exports = function(grunt) {
   // for the deploy task I am going to rebuild everything then add an upload to s3
   // grunt-contrib-compress? 
 
-  // aws task fails silently when part of a tasklist :(
-  grunt.registerTask('publish', taskList.concat(['aws_s3']));
+  var publishTasks = taskList.concat(['aws_s3']);
+  publishTasks.splice(5,1);   // html validation (somehow messes with s3 upload, so splice it out)
+  grunt.registerTask('publish', publishTasks);
 
 };

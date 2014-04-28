@@ -1,0 +1,30 @@
+Credits for grunt.thomasleen.com
+================================
+
+About
+-----
+
+This is the main project example and slideshow for [a talk](http://www.meetup.com/Southern-Maine-Web-Developer-Group/events/177364922/) I gave on [Grunt.js](http://gruntjs.com/) for the [Southern Maine Web Developer Group](http://www.meetup.com/Southern-Maine-Web-Developer-Group/). 
+
+Team
+----
+
+Everything: Tom Leen
+Contact: tl -at- thomasleen.com
+URLs: http://www.thomasleen.com/ https://github.com/tleen
+
+Why
+---
+
+I have been using Grunt for awhile, but always learned just enough of it to get by. This talk was a way for me to learn more about Grunt and introduce it to others as well.
+
+
+Technologies
+------------
+
+The [Node.js](http://nodejs.org/) server environment for project builds.
+[Grunt](http://gruntjs.com/) as the build tool and **topic**. 
+[Jade](http://jade-lang.com/) is for html and templating. 
+I am handing CSS using [SASS](http://sass-lang.com/).
+The [Reveal.js](http://lab.hakim.se/reveal-js) presentation framework is a basis for the slides/UI.
+The site is hosted on [Amazon S3](http://aws.amazon.com/s3/).
