@@ -128,7 +128,7 @@ module.exports = function(grunt) {
 
     'imagemin', // optimize images + move to tmp
 
-    // xx - running validation before imagemin causes imagemin to fail
+    // xx - running validation before imagemin causes imagemin to fail (and aws_s3)
     'validation', // validate html
 
     'jshint', // validate javascript
