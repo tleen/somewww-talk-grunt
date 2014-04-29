@@ -15,8 +15,10 @@ html(lang='en')
     link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/css/theme/default.css', id='theme')
     link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/lib/css/zenburn.css')
     link(rel='stylesheet' href='index.css')
-    //if lt IE 9 
-      script(src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/lib/js/html5shiv.jsc')
+
+    <!--[if lt IE 9]>
+    | <script src="//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/lib/js/html5shiv.js"></script>
+    <![endif]-->
     script(src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/lib/js/head.min.js', defer, async)
     script(src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/js/reveal.min.js', defer, async)
     script(src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/plugin/highlight/highlight.js')
