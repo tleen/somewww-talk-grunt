@@ -19,6 +19,7 @@ html(lang='en')
       script(src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/lib/js/html5shiv.jsc')
     script(src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/lib/js/head.min.js', defer, async)
     script(src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/js/reveal.min.js', defer, async)
+    script(src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/2.6.2/plugin/highlight/highlight.js')
     script(src='index.js', defer, async)
 
 
@@ -37,4 +38,9 @@ html(lang='en')
         section
           h2 Slide Two
           p This is content for slide two
+        section
+          h3 Testing highlighting
+          pre
+            code(class='language-javascript')
+              include include/test.js
 
