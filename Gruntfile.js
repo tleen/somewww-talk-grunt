@@ -63,7 +63,7 @@ module.exports = function(grunt) {
 
     jade: {
       options: {
-	pretty: true
+	pretty: false
       },
       templates: {expand: true , cwd: 'src/jade', src: ['*.jade'], dest: 'tmp/', ext: '.html'}
     },
