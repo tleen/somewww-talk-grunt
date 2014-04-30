@@ -55,6 +55,19 @@ module.exports = function(grunt) {
     cssmin : [
       {src: 'tmp/index.css', dest: 'tmp/index.css'}
     ],
+
+    favicons : {
+      options : {
+	html : 'tmp/index.html',
+	HTMLPrefix : 'images/favicons/',
+	apple : false,
+	windowsTile : false
+      },
+      generate : {
+	src: 'src/favicon/favicon.png',
+	dest: 'tmp/images/favicons/'
+      }
+    },
     
     imagemin: {
       options: {cache: false},
@@ -114,6 +127,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-favicons');
   grunt.loadNpmTasks('grunt-html-validation');
   grunt.loadNpmTasks('grunt-mkdir');
 
@@ -127,6 +141,8 @@ module.exports = function(grunt) {
 
 
     'imagemin', // optimize images + move to tmp
+
+    'favicons', // generate favicons and insert favicon markup into html
 
     // xx - running validation before imagemin causes imagemin to fail (and aws_s3)
     'validation', // validate html
