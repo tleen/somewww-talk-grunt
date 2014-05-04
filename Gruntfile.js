@@ -4,6 +4,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     s3Credentials: grunt.file.readJSON('.s3-auth.json'),
+    generatedTime : (new Date()).toISOString(), 
 
     // the ordering of these tasks does not matter, I did it alphabetically
 
@@ -56,6 +57,12 @@ module.exports = function(grunt) {
       {src: 'tmp/index.css', dest: 'tmp/index.css'}
     ],
 
+    env : {
+      vars : {
+	DATETIME : '<%= generatedTime %>'
+      }
+    },
+
     favicons : {
       options : {
 	html : 'tmp/index.html',
@@ -76,17 +83,28 @@ module.exports = function(grunt) {
 
     jade: {
       options: {
-	pretty: false
+	pretty: false,
+	data : {
+	  datetime : '<%= generatedTime %>',
+	  version : '<%= pkg.version %>'
+	}
       },
       templates: {expand: true , cwd: 'src/jade', src: ['*.jade'], dest: 'tmp/', ext: '.html'}
     },
 
     jshint: {
       options: {
-	smarttabs: true
+	node : true,
+	smarttabs: true,
+	predef : [ // required because of mocha, allowed 'predefined' terms
+          'after',
+          'before',
+          'beforeEach',
+          'describe',
+	  'it']
       },
       files: {
-	src : ['Gruntfile.js', 'src/js/*.js']
+	src : ['Gruntfile.js', 'src/js/*.js', 'test/*.js']
       }
     },
 
@@ -101,6 +119,21 @@ module.exports = function(grunt) {
     sass: [
       {src: 'src/scss/index.scss', dest: 'tmp/index.css'}
     ],
+
+    test: {
+      options : {
+        ui : 'bdd',
+        require : [
+          'should'
+        ]
+      },
+      local : {
+	src: 'test/local.js'
+      },
+      remote : {
+	src: 'test/remote.js'
+      }
+    },
 
     uglify: [
       {src: 'tmp/index.js', dest: 'tmp/index.js'}
@@ -117,6 +150,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-aws-s3');
+  grunt.loadNpmTasks('grunt-cafe-mocha');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -127,12 +161,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-favicons');
   grunt.loadNpmTasks('grunt-html-validation');
   grunt.loadNpmTasks('grunt-mkdir');
 
+  // I like it better when test task is named 'test'
+  grunt.renameTask('cafemocha', 'test');
+
 
   var taskList = [
+    'env',
     'clean:pre', // make sure dist directory is clear
     'mkdir',  // make tmp dir for build
 
@@ -144,8 +183,8 @@ module.exports = function(grunt) {
 
     'favicons', // generate favicons and insert favicon markup into html
 
-    // xx - running validation before imagemin causes imagemin to fail (and aws_s3)
-    'validation', // validate html
+    // xx - running validation before imagemin causes imagemin to fail (and aws_s3, and mocha)
+//    'validation', // validate html
 
     'jshint', // validate javascript
 
@@ -162,6 +201,7 @@ module.exports = function(grunt) {
 
     // force this to run even if other tasks fail
 */
+    'test:local', // read index.html file from /dest and verify contents
     'clean:post' // remove tmp dir and misc build files
   ];
 
@@ -170,8 +210,8 @@ module.exports = function(grunt) {
   // for the deploy task I am going to rebuild everything then add an upload to s3
   // grunt-contrib-compress? 
 
-  var publishTasks = taskList.concat(['aws_s3']);
-  publishTasks.splice(5,1);   // html validation (somehow messes with s3 upload, so splice it out)
+  var publishTasks = taskList.concat(['aws_s3', 'test:remote']);
+//  publishTasks.splice(6,1);   // html validation (somehow messes with s3 upload, so splice it out)
   grunt.registerTask('publish', publishTasks);
 
 };
