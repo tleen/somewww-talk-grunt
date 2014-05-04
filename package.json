@@ -1,6 +1,6 @@
 {
   "name": "somewww-talk-grunt",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "My SoME WWW group talk on Grunt, May 8th, 2014",
   "main": "index.js",
   "scripts": {
