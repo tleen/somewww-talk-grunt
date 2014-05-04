@@ -10,3 +10,7 @@ $white: #fff;
 header{
   display: none;
 }
+
+h3:not(:first-child){
+  margin-top: 20px;
+}
