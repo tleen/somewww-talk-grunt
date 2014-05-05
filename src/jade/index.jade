@@ -31,19 +31,99 @@ html(lang='en')
       
     .reveal
       .slides
+
         section
           img(src='images/grunt-logo.png', alt='The grunt logo')
           h2 Grunt
           p An introduction to the Grunt task runner.
           p.credits
             | by Tom Leen (tl@thomasleen.com)
+
         section
-          h2 Slide Two
-          p This is content for slide two
+          h2 Grunt is...
+          ul 
+            li A "task runner"
+            li Universally seen as a build tool
+            li Built in Node
+            li Similar tools: Make, Custom scripts (bash...), Rake, Ant, Maven...
+
         section
-          h3 Testing highlighting
-          pre
-            code(class='language-javascript')
-              include include/test.js
+          h2 Why use Grunt?
+          ul
+            li Its Javascript 
+            li Lots of pre-made tasks
+            li Modern orientation in tasks
+
+        section
+          section
+            h2 Minimal Node
+            p 
+              | Grunt and its tasks use the 
+              strong: a(href='http://www.nodejs.org') Node environment 
+              | to execute. The end result does not have to be a Node project but the build environment needs to be  
+              i setup  
+              | like one.
+              
+          section
+            h2 Project setup
+            h3 NPM
+            p 
+              a(href='http://www.npmjs.org') The Node Package Manager  
+              | This will be your means for getting grunt and your needed tasks, NPM gets its information via your...
+            h3 package.json
+            p 
+              | You will need a  
+              a(href='https://www.npmjs.org/doc/json.html') package.json  
+              | file to manage your environment. This lives in the root of your project and is a json object of configuration properties.
+          section
+            h2 This project's package.json
+            p The vital part here are the dependencies/devDependencies, this is where grunt and the tasks I need are imported:
+            pre
+              code(class='language-javascript')
+                include ../../package.json
+          section
+            h2 NPM install
+            p Executing the 'npm install' command will cause npm to install all the local dependencies (tasks and support libraries). Then grunt will almost work...
+          section
+            h2 grunt-cli
+            p 
+              | You also need one global command (if you are running on the command line): 'grunt-cli'. The  
+              a(href='https://github.com/gruntjs/grunt-cli') command line runner  
+              | for Grunt.
+            pre
+              code(class='language-bash')
+                | npm install -g grunt-cli
+            ul 
+              li The 'g' flag installs this globally
+              li Will run the project local version of grunt
+              li Solves dependency problems with other projects using different grunt versions
+
+        section
+          section
+            h2 Gruntfile.js
+            p Grunt looks for its configuration in another file in the root of your project, your  
+              a(href='http://gruntjs.com/sample-gruntfile') Gruntfile.js
+          section
+            h2 Task setup
+            p While NPM gets the tasks, the gruntfile tells Grunt what to do with them.
+          section
+            h2 It's Javascript
+            p The gruntfile is a javascript file, which means that your Grunt configuration can be programmatically altered. Handy!
+          section
+            h2 This project's Grunt.js
+            pre
+              code(class='language-javascript')
+                include ../../Gruntfile.js
+          section
+            h2 Three major sections
+            h3 grunt.initConfig
+            p Where we configure each task.
+            h3 grunt.loadNpmTasks
+            p Where we load each task.
+            h3 grunt.registerTasks  
+            p Where we setup our task ordering
+        
+
+
 //
   Generated @ #{datetime}, version #{version}
