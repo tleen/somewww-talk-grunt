@@ -229,20 +229,59 @@ html(lang='en')
               code(class='language-javascript')
                 include include/gruntfile-init-config.js
           section
-            h2 Main Concepts
-            p Grunt tasks are configured around two main concepts:
+            h2 Main concepts
+            p Grunt tasks are configured around three main concepts:
+            h3 Targets
+            p A specific named configuration
             h3 Files
             p What files to operate on (and where to write results)
             h3 Options
             p Task dependent options for how it should run
 
           section
-            h2 Simple Config Example
+            h2 Simple config example
             pre
               code(class='language-javascript')
                 include include/single-task-config.js
-              
+            p A very simple task configuration for the "uglify" task. Take in the "tmp/index.js" file as input, uglify and output as the same file.
+          section
+            h2 Targets
+            p You can name the specific configurations, so that you may call that configuration. Remember the ':'? You don't have to name it if you just want to run that one configuration simply.
+            pre
+              code(class='language-javascript')
+                include include/gruntfile-task-targets.js
+            pre
+              code(class='language-bash')
+                | grunt concat # run the js and css (all) tasks
+                | grunt concat:js # just run the one named task configuration
+          section
+            h2 Target names
+            p The names are descriptive, but dont have to be anything specific.
+            p 
+              | except "
+              strong options 
+              |" that is reserved for setting up the options for each task... 
+          section
+            h2 Options
+            p You can pass these in under the property name "options":
+            pre
+              code(class='language-javascript')
+                include include/options.js
+            p If options are at the same level as the targets these options apply to all task targets, you can override locally in the target configuration. 
 
+        section
+          section
+            h2 File configurations
+            p 
+              | Because file input and output is so often used in Grunt tasks, Grunt has a  
+              a(href='http://gruntjs.com/configuring-tasks') sophisticated syntax  
+              | for describing file locations and sources (src-dest mappings).
+            p Wildcards, directory expansion, even using javascript functions to filter files. Very flexible!
+
+          section
+            h2 File configurations :(
+            p There are also a lot of ways to configure files. It can get confusing.
+              
             
 
       
