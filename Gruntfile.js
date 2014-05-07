@@ -50,7 +50,7 @@ module.exports = function(grunt) {
     },
 
     csslint : [
-      {expand: true, src: 'tmp/*.css'}
+      {src: 'tmp/*.css'}
     ],
     
     cssmin : [
