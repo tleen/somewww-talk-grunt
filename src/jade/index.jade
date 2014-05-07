@@ -44,8 +44,8 @@ html(lang='en')
           ul 
             li A "task runner"
             li Universally seen as a build tool
-            li Built in Node
-            li Similar tools: Make, Custom scripts (bash...), Rake, Ant, Maven...
+            li Built in Javascript/Node
+            li Similar tools: Make, Custom scripts (bash...), Rake, Ant, Maven, Phing, Laravel, Gulp...
 
         section
           h2 Why use Grunt?
@@ -77,7 +77,7 @@ html(lang='en')
               | file to manage your environment. This lives in the root of your project and is a json object of configuration properties.
           section
             h2 This project's package.json
-            p The vital part here are the dependencies/devDependencies, this is where grunt and the tasks I need are imported:
+            p The vital part here are the dependencies/devDependencies, this is where grunt and the tasks you need are imported:
             pre
               code(class='language-javascript')
                 include ../../package.json
@@ -101,14 +101,18 @@ html(lang='en')
         section
           section
             h2 Gruntfile.js
-            p Grunt looks for its configuration in another file in the root of your project, your  
+            p 
+              | Grunt looks for its configuration in another file in the root of your project, your  
               a(href='http://gruntjs.com/sample-gruntfile') Gruntfile.js
+              |. This file is actually a Node module, that does not have to mean much, except most of your configuration is defined in a  
+              strong Javascript function  
+              | which is passed a grunt object, which is what you actually configure.
           section
             h2 Task setup
             p While NPM gets the tasks, the gruntfile tells Grunt what to do with them.
           section
             h2 It's Javascript
-            p The gruntfile is a javascript file, which means that your Grunt configuration can be programmatically altered. Handy!
+            p The gruntfile is a Javascript file, which means that your Grunt configuration can be programmatically altered. Handy!
           section
             h2 This project's Grunt.js
             pre
@@ -121,8 +125,127 @@ html(lang='en')
             h3 grunt.loadNpmTasks
             p Where we load each task.
             h3 grunt.registerTasks  
-            p Where we setup our task ordering
-        
+            p Where we setup our task list(s) and ordering
+
+        section
+          section
+            h2 Tasks
+            p 
+              | All the things you have Grunt do are called  
+              strong tasks
+              |, enabled through  
+              strong plugins
+              |, which are node  
+              strong modules
+              |.
+            p All you have to know is that using the package.json file you can install the tasks you need Grunt to use.
+          section
+            h2 What do tasks do?
+            p 
+              | Mostly everything. There are ~2800  
+              a(href='http://gruntjs.com/plugins') available  
+              | at last count.
+            p Building this presentations we used: S3 upload, directory/file creation/deletion, file concatenation, file copying, CSS|JS|HTML minification, JS|CSS(|HTML) validation, environment manipulation, favicon generation, image optimization, HTML templating, SASS to CSS generation, and automated testing.
+            p Just for a static website!
+          section
+            h2 Configuration
+            p 
+              | These tasks were  
+              strong already available  
+              | we just had to download and configure them.
+          section
+            h2 Tasks in package.json
+            pre
+              code(class='language-javascript')
+                include include/imports-from-package.json
+          section
+            h2 Getting tasks
+            pre
+              code(class='language-bash')
+                | npm install
+            p NPM will take care of finding and installing all the tasks listed in your package.json file (and the proper versions too!)
+              
+          section
+            h2 Loading tasks
+            p You load the tasks in your Gruntfile:
+            pre
+              code(class='language-javascript')
+                include include/gruntfile-load-tasks.js
+            p Now they are available for use...
+
+          section
+            h2 Registering tasks
+            p You can setup lists of tasks to run, sometimes you only want to run a few, other time more.
+            pre
+              code(class='language-javascript')
+                include include/gruntfile-register-tasks.js
+            p You need to call "registerTask" with an array of task names in order of execution.
+
+          section
+            h2 Task Names
+            p 
+              | Tasks come with a default name, look in each tasks doc, its usually the last part of the task plugin's name. For example 'grunt-contrib-
+              strong copy  
+              | is referenced as 'copy'. This is not always the case, see each plugin's docs. This is the name you use in the task list.
+
+          section
+            h2 Array of task names
+            p Because the task list is an array, and the Gruntfile is Javascript you can also programatically maniplate it:
+            pre
+              code(class='language-javascript')
+                include include/gruntfile-update-tasks.js
+            p Rather than list my tasks twice, I just add my 'publish' tasks to the end of the list.
+          section
+            h2 Default tasks
+            p When you register a task list with the name 'default' that task list will execute if you call grunt without specifying a list:
+            pre
+              code(class='language-bash')
+                | grunt
+          section
+            h2 More task lists
+            p You can run other lists of tasks by using a name that is not 'default', and calling grunt with that name as the argument. In this project there are two defined task lists:
+            h3 default
+            p Build project to a local destination
+              pre
+                code(class='language-bash')
+                  | grunt
+            h3 publish
+            p Build project to a local destination and upload to s3
+              pre
+                code(class='language-bash')
+                  | grunt publish
+          section
+            h2 Task targets
+            p Some tasks are called by name alone, others are called by name, with a following ':' and a further description.
+            pre
+              code(class='language-javascript')
+                include include/gruntfile-register-tasks-sub.js
+            p These are different configurations of the same task. This lets you use a task differently in the same list.
+        section
+          section
+            h2 Configuration
+            p Most of the work in setting up Grunt will be in your task configuration. This takes place in the grunt.initConfig function:
+            pre
+              code(class='language-javascript')
+                include include/gruntfile-init-config.js
+          section
+            h2 Main Concepts
+            p Grunt tasks are configured around two main concepts:
+            h3 Files
+            p What files to operate on (and where to write results)
+            h3 Options
+            p Task dependent options for how it should run
+
+          section
+            h2 Simple Config Example
+            pre
+              code(class='language-javascript')
+                include include/single-task-config.js
+              
+
+            
+
+      
 
 
 //

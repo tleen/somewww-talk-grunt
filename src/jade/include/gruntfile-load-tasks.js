@@ -1,0 +1,16 @@
+grunt.loadNpmTasks('grunt-aws-s3');
+grunt.loadNpmTasks('grunt-cafe-mocha');
+grunt.loadNpmTasks('grunt-contrib-clean');
+grunt.loadNpmTasks('grunt-contrib-concat');
+grunt.loadNpmTasks('grunt-contrib-copy');
+grunt.loadNpmTasks('grunt-contrib-csslint');
+grunt.loadNpmTasks('grunt-contrib-cssmin');
+grunt.loadNpmTasks('grunt-contrib-jade');
+grunt.loadNpmTasks('grunt-contrib-jshint');
+grunt.loadNpmTasks('grunt-contrib-imagemin');
+grunt.loadNpmTasks('grunt-contrib-sass');
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-env');
+grunt.loadNpmTasks('grunt-favicons');
+grunt.loadNpmTasks('grunt-html-validation');
+grunt.loadNpmTasks('grunt-mkdir');
