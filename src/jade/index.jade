@@ -1,4 +1,4 @@
-doctype html
+Bdoctype html
 //- basically a copy of the reveal.js html template, reveal content is deleivered from an external source just to simplify the build process of this project
 html(lang='en')
   head
@@ -310,16 +310,22 @@ html(lang='en')
               | This has Grunt finding the input files via the pattern  
               strong and  
               | creating the output file pattern based on the input file. Handy!
-              
-            
-          
-          
-
 
         section
           section
             h2 Passing data
-            // about passing data in the gruntfile
+            p Another useful thing you can do is pass data into tasks. This lets you store things like credentials securely. You can then pass these into options.
+          section
+            h2 Example
+            pre
+              code(class='language-javascript')
+                include include/grunt-passing-data.js
+          section
+            h2 Tests
+            p
+              | You can see in the tests that I use data passing and  
+              a(href='https://github.com/jsoverson/grunt-env') grunt-env  
+              | to test that things were properly built and placed.
 
 
               
