@@ -50,7 +50,7 @@ html(lang='en')
         section
           h2 Why use Grunt?
           ul
-            li Its Javascript 
+            li It is Javascript (one language)
             li Lots of pre-made tasks
             li Modern orientation in tasks
 
@@ -259,7 +259,7 @@ html(lang='en')
             p The names are descriptive, but dont have to be anything specific.
             p 
               | except "
-              strong options 
+              strong options
               |" that is reserved for setting up the options for each task... 
           section
             h2 Options
@@ -268,6 +268,9 @@ html(lang='en')
               code(class='language-javascript')
                 include include/options.js
             p If options are at the same level as the targets these options apply to all task targets, you can override locally in the target configuration. 
+          section
+            h2 Which Options
+            p The options are dependent on each task, use the documentation for each to figure out what to use and why.
 
         section
           section
@@ -280,7 +283,45 @@ html(lang='en')
 
           section
             h2 File configurations :(
-            p There are also a lot of ways to configure files. It can get confusing.
+            p There are also a lot of ways to configure files. It can get confusing. Use their docs:
+            ul
+              li: a(href='http://gruntjs.com/configuring-tasks#compact-format') Compact Format
+              li: a(href='http://gruntjs.com/configuring-tasks#files-object-format') Files Object Format
+              li: a(href='http://gruntjs.com/configuring-tasks#files-array-format') Files Array Format
+          section
+            h2 File selection globbing
+            p 
+              | This is where you can do a lot with the built in  
+              a(href='http://gruntjs.com/configuring-tasks#globbing-patterns') pattern matching
+              |:
+            pre
+              code(class='language-javascript')
+                include include/globbing.js
+          section
+            h2 Expanding
+            p 
+              | Most useful is building the files object dynamically   
+              a(href='http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically') via expanding
+              |:
+            pre
+              code(class='language-javascript')
+                include include/expanding.js
+            p 
+              | This has Grunt finding the input files via the pattern  
+              strong and  
+              | creating the output file pattern based on the input file. Handy!
+              
+            
+          
+          
+
+
+        section
+          section
+            h2 Passing data
+            // about passing data in the gruntfile
+
+
               
             
 
