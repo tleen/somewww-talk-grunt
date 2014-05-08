@@ -23,7 +23,7 @@ module.exports = function(grunt) {
 	  force: true // dist is a symlink to a www directory so force alows me to clean contents out of current directory
 	},
 	src: [ 
-	'dist/*', // remove everythig in dist except the readme (this keeps dist as an active dir in source control)
+	'dist/*', // remove everythig in dist except the readme
 	'!dist/README.md'], // ignore the README file
       },
       post: [
